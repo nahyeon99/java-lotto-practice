@@ -7,6 +7,7 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Supplier;
 
 public class InputUtil {
 
@@ -40,5 +41,15 @@ public class InputUtil {
                 .map(String::trim)
                 .map(InputUtil::readNumber)
                 .toList();
+    }
+
+    public static <T> T repeatUntilValidInput(Supplier<T> repeatSupplier) {
+        while (true) {
+            try {
+                return repeatSupplier.get();
+            } catch (RuntimeException exception) {
+                System.out.println(exception.getMessage());
+            }
+        }
     }
 }
