@@ -20,6 +20,14 @@ public class WinningLotto {
         return new WinningLotto(lotto, lottoNumber);
     }
 
+    public boolean containsByLottoNumber(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
+    }
+
+    public boolean compareBonusNumber(LottoNumber lottoNumber) {
+        return bonusNumber.equals(lottoNumber);
+    }
+
     private void validateDuplicateBonusNumber(Lotto lotto, LottoNumber bonusNumber) {
         if (lotto.contains(bonusNumber)) {
             throw new IllegalArgumentException(INVALID_DUPLICATE_BONUS_LOTTO_NUMBER.getKorean());
