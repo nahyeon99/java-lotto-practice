@@ -4,8 +4,7 @@ import java.math.BigDecimal;
 import lotto.exception.ExceptionMessage;
 
 public class Money {
-    public static final Money ZERO = Money.wons(0);
-    private static final Money MINUS_ONE = Money.wons(-1);
+    private static final BigDecimal HUNDRED_CALCULATE_RATE = BigDecimal.valueOf(100);
     private static final BigDecimal LOTTO_PER_AMOUNT = BigDecimal.valueOf(1_000);
     private static final BigDecimal MAX_LOTTOS_PURCHASE_AMOUNT = BigDecimal.valueOf(300_000);
 
@@ -26,8 +25,16 @@ public class Money {
         return new Money(BigDecimal.valueOf(amount));
     }
 
-    public BigDecimal calculateLottoCount() {
-        return amount.divide(LOTTO_PER_AMOUNT);
+    public int calculateLottoCount() {
+        return amount.divide(LOTTO_PER_AMOUNT).intValue();
+    }
+
+    public BigDecimal multiply(long number) {
+        return amount.multiply(BigDecimal.valueOf(number));
+    }
+
+    public BigDecimal calculateReturnRate(long winningAmount) {
+        return BigDecimal.valueOf(winningAmount).divide(amount).multiply(HUNDRED_CALCULATE_RATE);
     }
 
     private static void validateLottosAmountSize(int amount) {
