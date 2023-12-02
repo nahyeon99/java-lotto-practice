@@ -1,6 +1,8 @@
 package lotto.domain.lotto;
 
 import java.util.List;
+import lotto.domain.WinningLotto;
+import lotto.dto.MatchDto;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -12,4 +14,11 @@ public class Lottos {
     public static Lottos of(final List<Lotto> lottos) {
         return new Lottos(lottos);
     }
+
+    public List<MatchDto> match(WinningLotto winningLotto) {
+        return lottos.parallelStream()
+                .map(lotto -> lotto.match(winningLotto))
+                .toList();
+    }
+
 }

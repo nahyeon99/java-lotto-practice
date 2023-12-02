@@ -4,6 +4,8 @@ import static lotto.exception.ExceptionMessage.INVALID_DUPLICATE_LOTTO_NUMBER;
 import static lotto.exception.ExceptionMessage.INVALID_LOTTO_NUMBER_SIZE;
 
 import java.util.List;
+import lotto.domain.WinningLotto;
+import lotto.dto.MatchDto;
 
 public class Lotto {
     static final int LOTTO_NUMBER_COUNT = 6;
@@ -23,6 +25,21 @@ public class Lotto {
         validateDuplicateNumber(lottoNumbers);
 
         return new Lotto(lottoNumbers);
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
+    }
+
+    public MatchDto match(WinningLotto winningLotto) {
+        int matchCount = (int) numbers.parallelStream()
+                .filter(winningLotto::containsByLottoNumber)
+                .count();
+
+        boolean matchBonus = numbers.parallelStream()
+                .anyMatch(winningLotto::compareBonusNumber);
+
+        return new MatchDto(matchCount, matchBonus);
     }
 
     private static void validateNumbersSize(List<LottoNumber> numbers) {
