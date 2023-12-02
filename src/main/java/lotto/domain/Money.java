@@ -37,6 +37,10 @@ public class Money {
         return BigDecimal.valueOf(winningAmount).divide(amount).multiply(HUNDRED_CALCULATE_RATE);
     }
 
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
     private static void validateLottosAmountSize(int amount) {
         if (amount < LOTTO_PER_AMOUNT.intValue() || amount > MAX_LOTTOS_PURCHASE_AMOUNT.intValue()) {
             throw new IllegalStateException(ExceptionMessage.INVALID_MONEY_SIZE.getKorean());

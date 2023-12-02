@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import lotto.dto.MatchDto;
 
@@ -32,5 +33,17 @@ public enum PrizeType {
 
     public long calculateWinningAmount(long count) {
         return prizeAmount.multiply(count).longValue();
+    }
+
+    public int getMatchNumber() {
+        return matchNumber;
+    }
+
+    public boolean getMatchBonus() {
+        return matchBonus;
+    }
+
+    public BigDecimal getPrizeAmount() {
+        return prizeAmount.getAmount();
     }
 }

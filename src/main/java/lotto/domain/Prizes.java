@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import lotto.dto.MatchDto;
+import lotto.dto.PrizeDto;
 
 public class Prizes {
     private final Map<PrizeType, Long> prizes;
@@ -34,5 +35,9 @@ public class Prizes {
                 .sum();
 
         return purchaseAmount.calculateReturnRate(winningAmount);
+    }
+
+    public Long getCount(PrizeType prizeType) {
+        return prizes.getOrDefault(prizeType, 0L);
     }
 }
