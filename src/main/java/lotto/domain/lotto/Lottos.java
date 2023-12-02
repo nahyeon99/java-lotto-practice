@@ -2,6 +2,7 @@ package lotto.domain.lotto;
 
 import java.util.List;
 import lotto.domain.WinningLotto;
+import lotto.dto.LottoDto;
 import lotto.dto.MatchDto;
 
 public class Lottos {
@@ -21,4 +22,10 @@ public class Lottos {
                 .toList();
     }
 
+    public List<LottoDto> getLottos() {
+        return lottos.stream()
+                .map(Lotto::getLotto)
+                .map(LottoDto::new)
+                .toList();
+    }
 }

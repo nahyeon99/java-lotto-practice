@@ -4,6 +4,7 @@ import static lotto.exception.ExceptionMessage.INVALID_DUPLICATE_LOTTO_NUMBER;
 import static lotto.exception.ExceptionMessage.INVALID_LOTTO_NUMBER_SIZE;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.domain.WinningLotto;
 import lotto.dto.MatchDto;
 
@@ -40,6 +41,13 @@ public class Lotto {
                 .anyMatch(winningLotto::compareBonusNumber);
 
         return new MatchDto(matchCount, matchBonus);
+    }
+
+    public List<Integer> getLotto() {
+        return numbers.stream()
+                .map(LottoNumber::getLottoNumber)
+                .sorted()
+                .collect(Collectors.toUnmodifiableList());
     }
 
     private static void validateNumbersSize(List<LottoNumber> numbers) {

@@ -41,6 +41,10 @@ public class LottoNumber {
         return Objects.hash(number);
     }
 
+    public int getLottoNumber() {
+        return number;
+    }
+
     private static void validateNumberRange(int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_RANGE.getKorean());
