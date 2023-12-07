@@ -41,6 +41,17 @@ public class Lotto {
                 .collect(Collectors.toUnmodifiableList());
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return numbers.stream()
+                .anyMatch(number -> lottoNumber.equals(number));
+    }
+
+    public int match(Lotto other) {
+        return (int) numbers.stream()
+                .filter(number -> other.contains(number))
+                .count();
+    }
+
     private void validateNumbersSize(int count) {
         if (count != LOTTO_COUNTS) {
             throw new IllegalArgumentException();
