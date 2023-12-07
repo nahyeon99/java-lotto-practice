@@ -48,6 +48,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return Objects.hash(number);
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     private void validateNumberSize(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_LOTTO_NUMBER_RANGE.getKorean());

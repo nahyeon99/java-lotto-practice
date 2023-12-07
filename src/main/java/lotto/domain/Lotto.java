@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.domain.lottoNumber.LottoNumber;
 import lotto.domain.lottoNumber.LottoNumberFactory;
 import lotto.exception.ExceptionMessage;
@@ -16,8 +18,13 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static Lotto randomOf() {
-        return new Lotto(LottoNumberFactory.getRandomNumbers(LOTTO_COUNTS));
+    public static List<Lotto> randomOf(int purchaseCount) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < purchaseCount; i++) {
+            lottos.add(new Lotto(LottoNumberFactory.getRandomNumbers(LOTTO_COUNTS)));
+        }
+
+        return lottos;
     }
 
     public static Lotto from(List<Integer> lottoNumbers) {
@@ -26,6 +33,12 @@ public class Lotto {
                 .toList();
 
         return new Lotto(numbers);
+    }
+
+    public List<Integer> getValues() {
+        return numbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toUnmodifiableList());
     }
 
     private void validateNumbersSize(int count) {
